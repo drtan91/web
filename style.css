@@ -1,145 +1,236 @@
-/* Reset */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+html, body { height: 100%; }
+body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #f4f7f6; margin: 0; padding: 0; }
+.container { max-width: 600px; margin: auto; background: white; padding: 30px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+h1 { color: #2c3e50; text-align: center; }
+/* Thông tin bác sĩ dưới tiêu đề */
+.doctor-info {
+    color: #b22222; /* đỏ đậm nhưng dịu mắt (firebrick) */
+    font-weight: 500;
+    text-align: center;
+    margin: 1px 0 1px;
+    font-size: 1.5rem; /* tăng gấp đôi so với 0.95rem */
+}
+.section { margin-bottom: 2px; padding: 2px 0; border-bottom: 1px solid #eee; }
+label { display: block; font-weight: bold; margin-bottom: 2px; margin-top: 2px; }
+select, input[type="number"] { width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; }
+.toggle-area { background: #e8f4fd; border-radius: 5px; display: flex; align-items: center; justify-content: space-between; padding: 8px; }
+/* Stay days button group */
+.stay-days { display: flex; gap: 8px; margin-top: 8px; margin-bottom: 8px; }
+.stay-btn { flex: 1; padding: 10px 8px; border: 2px solid #ddd; background: #fff; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 0.9rem; transition: all 0.2s; }
+.stay-btn:hover { border-color: #3498db; background: #f0f8ff; }
+.stay-btn.active { background: #3498db; color: white; border-color: #3498db; }
+/* BHYT button */
+.bhyt-btn { width: 100%; padding: 12px 10px; border: 2px solid #ddd; background: #fff; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 0.95rem; transition: all 0.2s; margin-top: 10px; }
+.bhyt-btn:hover { border-color: #27ae60; background: #f0f8ff; }
+.bhyt-btn.active { background: #27ae60; color: white; border-color: #27ae60; }
+/* Other services button group */
+#otherServices { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-top: 6px; }
+.other-btn { padding: 10px 8px; border: 2px solid #ddd; background: #fff; border-radius: 6px; cursor: pointer; font-weight: 500; font-size: 0.85rem; transition: all 0.2s; text-align: left; }
+.other-btn:hover { border-color: #3498db; background: #f0f8ff; }
+.other-btn.active { background: #3498db; color: white; border-color: #3498db; }
+.price-detail { margin-top: 5px; padding: 5px 8px; background: #f0f8ff; border-left: 4px solid #3498db; font-size: 0.9em; color: #2c3e50; }
+.price-detail span { font-weight: bold; color: #e74c3c; }
+.total-display { text-align: center; background: #27ae60; color: white; padding: 14px 8px; border-radius: 8px; margin-top: 10px; width: 90%; margin-left: auto; margin-right: auto; display: flex; justify-content: center; align-items: center; gap: 10px; }
+#finalAmount { font-size: 1.6em; font-weight: bold; margin: 0; }
+.total-display h2 { font-size: 1.5em; margin: 0; }
+/* Tối ưu cho màn hình điện thoại */
+@media (max-width: 480px) {
+    /* Edge-to-edge on small screens */
+    .container {
+        padding: 15px;
+        margin: 1px;
+        width: 100%;
+        max-width: 100%;
+        border-radius: 0;
+        box-shadow: none;
+        /* account for iPhone notch / safe area */
+        padding-left: env(safe-area-inset-left);
+        padding-right: env(safe-area-inset-right);
+    }
+
+    h1 { font-size: 1.5rem; }
+
+    /* Làm các ô chọn to ra để dễ bấm bằng tay */
+    select, input[type="number"] {
+        height: 50px; 
+        font-size: 16px; /* Tránh bị zoom trên iPhone khi bấm vào */
+    }
+
+    /* Biến danh sách checkbox thành các hàng lớn dễ tích */
+    #otherServices div {
+        background: #f9f9f9;
+        padding: 12px;
+        margin-bottom: 8px;
+        border-radius: 6px;
+        display: flex;
+        align-items: center;
+    }
+
+    input[type="checkbox"] {
+        width: 22px;
+        height: 22px;
+        margin-right: 12px;
+    }
+
+    /* Cố định tổng tiền ở dưới cùng màn hình (Sticky Footer) */
+    .total-display {
+        position: sticky;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        margin-top: 30px;
+        box-shadow: 0 -5px 15px rgba(0,0,0,0.1);
+    }
 }
 
-body {
-    font-family: 'Segoe UI', Arial, sans-serif;
-    background-color: #f0fdf4;
-    color: #333;
-    padding-bottom: 70px; /* chừa chỗ cho footer fixed */
-}
-
-/* Header */
-header {
+/* Homepage styles */
+.homepage-header {
     background: linear-gradient(135deg, #4CAF50, #2e7d32);
     color: white;
     text-align: center;
-    padding: 2rem 1rem;
-    border-bottom-left-radius: 25px;
-    border-bottom-right-radius: 25px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    padding: 2.5rem 1rem;
 }
 
-header h1 {
-    font-size: 1.6rem;
+.homepage-header h1 {
+    font-size: 2rem;
     margin-bottom: 0.5rem;
 }
 
-header p {
+.homepage-header p {
+    margin: 0.4rem 0;
+    color: rgba(255, 255, 255, 0.95);
+}
+
+.subtitle {
     font-size: 1rem;
-    opacity: 0.95;
+    opacity: 0.9;
 }
 
-header .subtitle {
-    font-size: 0.9rem;
-    margin-top: 0.5rem;
-    opacity: 0.85;
-}
-
-/* Tuần thai */
 .week {
     background: #c8e6c9;
     margin: 1rem;
-    padding: 1rem;
-    border-radius: 12px;
+    padding: 1.2rem;
+    border-radius: 16px;
     text-align: center;
     font-weight: bold;
     color: #1b5e20;
-    box-shadow: inset 0 2px 6px rgba(0,0,0,0.1);
+    box-shadow: inset 0 2px 6px rgba(0,0,0,0.08);
 }
 
-/* Card tính năng */
 .features {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
     gap: 1rem;
     padding: 1rem;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
 .card {
     background: white;
-    padding: 1.2rem;
-    border-radius: 16px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    padding: 1.5rem;
+    border-radius: 18px;
+    box-shadow: 0 10px 24px rgba(0,0,0,0.08);
     text-align: center;
     transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.card-link {
+    display: block;
+    color: inherit;
+    text-decoration: none;
 }
 
 .card i {
     font-size: 2rem;
     color: #4CAF50;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.7rem;
 }
 
 .card h3 {
-    font-size: 1rem;
-    margin-bottom: 0.3rem;
+    margin-bottom: 0.5rem;
+    font-size: 1.1rem;
 }
 
 .card p {
-    font-size: 0.85rem;
     color: #555;
+    line-height: 1.5;
 }
 
 .card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 6px 14px rgba(0,0,0,0.2);
+    transform: translateY(-6px);
+    box-shadow: 0 14px 30px rgba(0,0,0,0.12);
 }
 
-/* Lời khuyên */
 .advice {
-    background: #fff;
-    margin: 1rem;
-    padding: 1rem;
+    max-width: 720px;
+    margin: 2rem auto;
+    background: white;
     border-left: 5px solid #4CAF50;
-    border-radius: 12px;
+    padding: 1.4rem 1.6rem;
+    border-radius: 16px;
+    box-shadow: 0 10px 24px rgba(0,0,0,0.08);
     font-style: italic;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
 
-/* Footer navigation bar */
-footer {
+.advice blockquote {
+    margin: 0;
+    font-size: 1.1rem;
+    color: #1b5e20;
+}
+
+.advice cite {
+    display: block;
+    margin-top: 0.75rem;
+    text-align: right;
+    color: #555;
+}
+
+.homepage-footer {
     position: fixed;
     bottom: 0;
     left: 0;
     width: 100%;
     background: #4CAF50;
-    padding: 0.6rem 0;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    border-top-left-radius: 20px;
-    border-top-right-radius: 20px;
-    box-shadow: 0 -4px 10px rgba(0,0,0,0.2);
+    padding: 0.9rem 0;
+    border-top-left-radius: 16px;
+    border-top-right-radius: 16px;
+    box-shadow: 0 -4px 12px rgba(0,0,0,0.15);
 }
 
-footer nav a {
+.homepage-footer nav {
+    display: flex;
+    justify-content: space-around;
+    max-width: 720px;
+    margin: auto;
+}
+
+.homepage-footer nav a {
     color: white;
     text-decoration: none;
-    font-size: 0.8rem;
     display: flex;
     flex-direction: column;
     align-items: center;
+    font-size: 0.85rem;
 }
 
-footer nav a i {
-    font-size: 1.2rem;
+.homepage-footer nav a i {
     margin-bottom: 0.2rem;
 }
 
-footer nav a:hover {
-    color: #c8e6c9;
+.back-link {
+    margin-bottom: 16px;
 }
 
-/* Responsive */
+.back-link a {
+    color: #3498db;
+    text-decoration: none;
+    font-weight: 600;
+}
+
 @media (min-width: 768px) {
-    .features {
-        grid-template-columns: repeat(3, 1fr);
-    }
-    header h1 {
-        font-size: 2rem;
+    .homepage-footer nav {
+        width: 90%;
+        margin: 0 auto;
     }
 }
